@@ -7,7 +7,7 @@
 rBBM(
   n = 100,
   m = 1000,
-  k = 10,
+  k = 1,
   prob_vec = NULL,
   changepoints = NULL,
   prob_NA = NULL
@@ -18,13 +18,16 @@ rBBM(
 
 \item{m}{Array length}
 
-\item{k}{Number of change points.  The number of blocks is \eqn{k + 1}.}
+\item{k}{Number of change points.  The number of blocks is \eqn{k + 1}. It is
+overridden if changepoints is non-NULL.}
 
 \item{prob_vec}{Vector \eqn{k + 1} dimensional containing the probability
-parameter of each block.}
+parameter of each block. If NULL, the parameters are sampled independently
+from a uniform distribution}
 
 \item{changepoints}{A \eqn{k} dimensional vector containing the
-change point locations. The change points are between 1 and \eqn{m-1}}
+change point locations. The change points are between 1 and \eqn{m-1}. If
+NULL, the change points are sampled uniformly in \eqn{[1, m-1]}}
 
 \item{prob_NA}{Probability of each entry of being NA}
 }

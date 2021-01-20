@@ -4,8 +4,29 @@
 \alias{fit_model}
 \title{Fits a binary CPD model according to the method chosen}
 \usage{
-fit_model(data, method = "hierseg", arguments = list())
+fit_model(data_matrix, method = "hierseg", arguments = list())
+}
+\arguments{
+\item{data_matrix}{Data frame or matrix containing the data set codified
+in 0 or 1. The data can contain several rows, the methods use all data to
+estimate more accurately the change point locations.}
+
+\item{method}{The method that will be used to fit the model. The current
+implemented models are:
+\itemize{
+\item[\link[=compute_hierseg]{hierseg}] Hierarchical segmentation, also
+known as binary segmentation;
+\item[\link[=compute_dynseg]{'dynseg'}] Dynamical programming segmentation;
+\item[\link[=compute_cvdynseg]{'cvdynseg'}] Dynseg with cross validation
+on regularization constant;
+\item[\link[=compute_cvseg]{'cvseg'}] Dynseg with cross validation on the
+number of change points;
+\item[\link[=compute_fusedlasso]{'fusedlasso'}] Fused Lasso segmentation.
+}}
+
+\item{arguments}{list containing the arguments that will be used to fit the
+selected method. Each method might contain unique parameter.}
 }
 \description{
-Fits a binary CPD model according to the method chosen
+
 }

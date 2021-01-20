@@ -2,19 +2,35 @@ Package: bincpd
 Title: Change point detection models for binary data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Lucas",
+    c(person(given = "Lucas",
            family = "Prates",
            role = c("aut", "cre"),
-           email = "lucasdelprates@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: MIT + file LICENSE
+           email = "lucasdelprates@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID")),
+      person(given = "Florencia",
+           family = "Leonardi",
+           role = c("ths"),
+           email = "florencia@usp.br",
+           comment = c(ORCID = "0000-0002-0299-0680"))
+    )
+Description:  The bincpd package implements statistical models based on 
+            regularized likelihood to perform offline change point detection on binary data. 
+            In most change point problems, we usually work with a single time series 
+            which we wish to segment. We are interested in working with several time series 
+            data sampled from the same distribution.
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-LinkingTo: 
-    Rcpp
-Dependss: 
+Imports: 
     Rcpp,
-    CVXR
+    CVXR,
+    ECOSolveR
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -2,16 +2,25 @@
 % Please edit documentation in R/compute_dynseg.R
 \name{compute_dynseg}
 \alias{compute_dynseg}
-\title{Segments the data using dynamic programming algorithm}
+\title{Segments the data using dynamical programming algorithm}
 \usage{
-compute_dynseg(data, segthr = NULL, lambda = 1, pen_func = bic_loss_hs)
+compute_dynseg(data_matrix, segthr = NULL, lambda = 1, pen_func = bic_loss_hs)
 }
 \arguments{
+\item{data_matrix}{Data matrix to perform change point analysis}
+
 \item{segthr}{Threshold on the number of block segments to fit the model.
-This is highly recommend for perfomance issues on large datasets}
+This is highly recommend for performance issues on large data sets}
+
+\item{lambda}{Penalization constant}
+
+\item{pen_func}{The penalization function used for the computation
+of the estimator. A user specified function can be provided,
+with function signature/arguments is function(left_index, right_index, n, m),
+which represents the loss for the block interval i:j with left_index.
+The default loss is the BIC loss \eqn{-log(n)(|cp|+1)}.}
 }
 \description{
-Uses dynamical segmentation to obtain the
-log likelihood, changepoints and probabilities
-as a function of the number of segments
+Computes the exact solution of the regularized loss optimization problem,
+providing change point locations and the probabilities of each blocks
 }
