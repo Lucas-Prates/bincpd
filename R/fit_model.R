@@ -50,7 +50,9 @@ fit_model <- function(data_matrix, method = "hierseg", arguments = list()) {
   fit_arguments   <- c(list(data_matrix = data.matrix(data_matrix)), arguments)
   model <- do.call(methodcall_name, fit_arguments)
 
-  model$metadata <- list(method = method, arguments = model$arguments)
+  model$metadata <- list(method = method, arguments = model$arguments,
+                         n = nrow(data_matrix), m = ncol(data_matrix),
+                         columns = colnames(data_matrix))
   model$arguments <- NULL
   class(model) <- "bincpd"
 
