@@ -19,7 +19,7 @@ install it using the
 package, run the following command.
 
 ``` r
-devtools::install_github("package-repository-url")
+devtools::install_github("https://github.com/Lucas-Prates/bincpd")
 ```
 
 # Statistical Model and estimators
