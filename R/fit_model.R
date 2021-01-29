@@ -59,3 +59,24 @@ fit_model <- function(data_matrix, method = "hierseg", arguments = list()) {
   return(model)
 
 }
+
+#' @title
+#' Plot change point blocks with probabilties
+#'
+#' @description
+#'
+#' Method of the generic \link[=plot]{plot} for bincpd objects.
+#'
+#' @export
+plot.bincpd <- function(object, ...){
+  m <- object$metadata$m
+  method_name <- object$metadata$method
+  n_cp <- object$n_cp
+  block_ends <- c(1, object$changepoints, m)
+  probs <- c(object$probabilities, object$probabilities[length(object$probabilities)])
+  plot(block_ends, probs, type = "s",
+       xlab = "",
+       ylab = "Block probability",
+       main = paste0("Block plot for ", method_name)
+       )
+}
