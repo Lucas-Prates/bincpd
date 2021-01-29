@@ -33,7 +33,7 @@ generate_na <- function(n_samples, prob){
 #' @param  prob_NA Probability of each entry of being NA
 #' @export
 rBBM <- function(n = 100,
-                 m = 1000,
+                 m = 50,
                  k = 1,
                  prob_vec = NULL,
                  changepoints = NULL,

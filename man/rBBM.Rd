@@ -6,7 +6,7 @@
 \usage{
 rBBM(
   n = 100,
-  m = 1000,
+  m = 50,
   k = 1,
   prob_vec = NULL,
   changepoints = NULL,
