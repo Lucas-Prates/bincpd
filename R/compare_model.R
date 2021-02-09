@@ -3,7 +3,6 @@
 #' to other model or ground truth
 #'
 #' @description
-#'
 #' Compares or evaluates model estimated change point set against another model
 #' or ground truth. The comparison is made using common metrics to compare
 #' clusters. The metrics provided are
