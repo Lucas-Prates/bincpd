@@ -66,12 +66,52 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// compute_rand
+float compute_rand(IntegerVector cp1, IntegerVector cp2, int const& m);
+RcppExport SEXP _bincpd_compute_rand(SEXP cp1SEXP, SEXP cp2SEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type cp1(cp1SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type cp2(cp2SEXP);
+    Rcpp::traits::input_parameter< int const& >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_rand(cp1, cp2, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_hausdorff
+int compute_hausdorff(IntegerVector cp1, IntegerVector cp2);
+RcppExport SEXP _bincpd_compute_hausdorff(SEXP cp1SEXP, SEXP cp2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type cp1(cp1SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type cp2(cp2SEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_hausdorff(cp1, cp2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_symdiff
+int compute_symdiff(IntegerVector cp1, IntegerVector cp2);
+RcppExport SEXP _bincpd_compute_symdiff(SEXP cp1SEXP, SEXP cp2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type cp1(cp1SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type cp2(cp2SEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_symdiff(cp1, cp2));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_bincpd_compute_cvdynseg_cpp", (DL_FUNC) &_bincpd_compute_cvdynseg_cpp, 7},
     {"_bincpd_compute_cvseg_cpp", (DL_FUNC) &_bincpd_compute_cvseg_cpp, 5},
     {"_bincpd_compute_dynseg_cpp", (DL_FUNC) &_bincpd_compute_dynseg_cpp, 4},
     {"_bincpd_compute_hierseg_cpp", (DL_FUNC) &_bincpd_compute_hierseg_cpp, 4},
+    {"_bincpd_compute_rand", (DL_FUNC) &_bincpd_compute_rand, 3},
+    {"_bincpd_compute_hausdorff", (DL_FUNC) &_bincpd_compute_hausdorff, 2},
+    {"_bincpd_compute_symdiff", (DL_FUNC) &_bincpd_compute_symdiff, 2},
     {NULL, NULL, 0}
 };
 

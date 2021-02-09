@@ -43,7 +43,7 @@ fit_model <- function(data_matrix, method = "hierseg", arguments = list()) {
                            "cvseg", "fusedlasso")
 
   if ( !(method %in% IMPLEMENTED_METHODS) ) {
-    stop("The 'method' argument provided is not implemented!")
+    stop("Error! The 'method' argument provided is not implemented!")
   }
 
   methodcall_name <- paste0("compute_", method) # package function name

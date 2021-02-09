@@ -17,3 +17,44 @@ compute_hierseg_cpp <- function(data_matrix, n, m, pen_func) {
     .Call(`_bincpd_compute_hierseg_cpp`, data_matrix, n, m, pen_func)
 }
 
+#' @title
+#' Rand Index Function for change point detection
+#'
+#' @description
+#' Computes the rand Index (non-adjusted) for the change point sets. A specific
+#' equation for change point detection is used to make the computation faster.
+#' Proof of correctness of the equation is given in the dissertation.
+#'
+#' @param cp1 Change point set for model 1 or true change point set.
+#' @param cp2 Change point set for model 2 or true change point set.
+#' @param m The size of the vector array.
+#'
+compute_rand <- function(cp1, cp2, m) {
+    .Call(`_bincpd_compute_rand`, cp1, cp2, m)
+}
+
+#' @title
+#' Hausdorff distance metric
+#'
+#' @description
+#' Computes the Hausdorff distance between change point sets.
+#'
+#' @param cp1 Change point set for model 1 or true change point set.
+#' @param cp2 Change point set for model 2 or true change point set.
+compute_hausdorff <- function(cp1, cp2) {
+    .Call(`_bincpd_compute_hausdorff`, cp1, cp2)
+}
+
+#' @title
+#' Symmetric difference metric
+#'
+#' @description
+#' Computes the size of the symmetric difference between two change point
+#' detection sets
+#'
+#' @param cp1 Change point set for model 1 or true change point set.
+#' @param cp2 Change point set for model 2 or true change point set.
+compute_symdiff <- function(cp1, cp2) {
+    .Call(`_bincpd_compute_symdiff`, cp1, cp2)
+}
+
