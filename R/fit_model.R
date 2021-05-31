@@ -37,7 +37,8 @@
 #' @param arguments list containing the arguments that will be used to fit the
 #' selected method. Each method might contain unique parameter.
 #' @export
-fit_model <- function(data_matrix, method = "hierseg", arguments = list()) {
+fit_model <- function(data_matrix, method = "hierseg", arguments = list(),
+                      bootstrap = FALSE, boot_sample_size = 100) {
 
   IMPLEMENTED_METHODS <- c("hierseg", "dynseg", "cvdynseg",
                            "cvseg", "fusedlasso")
@@ -50,8 +51,39 @@ fit_model <- function(data_matrix, method = "hierseg", arguments = list()) {
   fit_arguments   <- c(list(data_matrix = data.matrix(data_matrix)), arguments)
   model <- do.call(methodcall_name, fit_arguments)
 
+  n <- nrow(data_matrix)
+  m <- ncol(data_matrix)
+
+  # Bootstrap computation
+  if(bootstrap){
+    cp_freq <- rep(0, m) # Probability of a column being detected as a cp
+    sym_diff_samp <- rep(0, boot_sample_size)
+    rand_samp <- rep(0, boot_sample_size)
+    ncp_samp <- rep(0, boot_sample_size)
+
+    for(i in 1:boot_sample_size){
+      boot_samp <- sample(n, n, replace = TRUE)
+      fit_arguments_boot <- c(list(data_matrix = data.matrix(data_matrix[boot_samp, ])), arguments)
+      model_boot <- do.call(methodcall_name, fit_arguments_boot)
+      cp_freq[model_boot$changepoints] = cp_freq[model_boot$changepoints] + 1
+      sym_diff_samp[i] = compute_symdiff(model$changepoints,
+                                         model_boot$changepoints)
+      rand_samp[i] = compute_rand(model$changepoints,
+                                  model_boot$changepoints, m)
+      ncp_samp[i] = length(model_boot$changepoints)
+
+    }
+    bootstrap_info <- list(b_samples = boot_sample_size,
+                           cp_freq = cp_freq,
+                           sym_diff_samp = sym_diff_samp,
+                           rand_samp = rand_samp,
+                           ncp_samp = ncp_samp)
+
+    model$bootstrap_info = bootstrap_info
+  }
+
   model$metadata <- list(method = method, arguments = model$arguments,
-                         n = nrow(data_matrix), m = ncol(data_matrix),
+                         n = n, m = m,
                          columns = colnames(data_matrix))
   model$arguments <- NULL
   class(model) <- "bincpd"
